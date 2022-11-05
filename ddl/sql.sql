@@ -37,3 +37,17 @@ CREATE TABLE public.posts (
 -- public.posts foreign keys
 
 ALTER TABLE public.posts ADD CONSTRAINT fk_author_bookstore FOREIGN KEY (thumbnail) REFERENCES public.files(id);
+
+
+-- public.users definition
+
+-- Drop table
+
+-- DROP TABLE public.users;
+
+CREATE TABLE public.users (
+	id uuid NULL DEFAULT uuid_generate_v4(),
+	username text NOT NULL,
+	"password" text NOT NULL,
+	CONSTRAINT users_username_key UNIQUE (username)
+);
