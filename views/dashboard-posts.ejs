@@ -1,0 +1,22 @@
+<%- include('includes/private/sec-a'); %>
+    <h1 class="h2">Posts</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Slug</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Contenido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(function(post){ %>
+                <tr>
+                    <td scope="row"><%= post.slug %></td>
+                    <td><%= post.title %></td>
+                    <td><%- post.excerpt %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <%- include('includes/private/sec-b'); %>

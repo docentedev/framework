@@ -1,0 +1,60 @@
+<script src="https://www.google.com/recaptcha/api.js?render=6Ldl3aMiAAAAAFsgJKVRFN-zPBfJyouqDP_I1y26"></script>
+
+<form id="dashboard-form-submit">
+    <div class="mb-3">
+        <label class="form-label" for="name">Nombre</label>
+        <input required placeholder="Ingresa tu nombre" type="text" name="name" id="dashboard-form-input-name"
+            class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="emailAddress">Email</label>
+        <input required placeholder="Ingresa tu email" type="email" name="emailAddress" id="dashboard-form-input-email"
+            class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="message">Mensaje</label>
+        <textarea required placeholder="Ingresa tu mensaje" class="form-control" name="message"
+            id="dashboard-form-input-message" cols="30" rows="10"></textarea>
+    </div>
+    <div class="d-grid">
+        <button id="dashboard-form-control" class="btn btn-dark btn-lg" type="submit">Enviar</button>
+    </div>
+</form>
+
+<script>
+    const submitControl = document.querySelector('#dashboard-form-submit')
+    const submitInputEmail = document.querySelector('#dashboard-form-input-email')
+    const submitInputMessage = document.querySelector('#dashboard-form-input-message')
+    const submitInputName = document.querySelector('#dashboard-form-input-name')
+    function handleSubmit(e) {
+        e.preventDefault();
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Ldl3aMiAAAAAFsgJKVRFN-zPBfJyouqDP_I1y26', { action: 'submit' }).then(async function (token) {
+                console.log(token);
+                const rawResponse = await fetch('/api/v1/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        token,
+                        message: submitInputMessage.value,
+                        email: submitInputEmail.value,
+                        name: submitInputName.value,
+                    })
+                })
+                const result = await rawResponse.json()
+                if (result) {
+                    if (result.success) {
+                        alert('Enviado con exito')
+                        submitInputMessage.value = ''
+                        submitInputEmail.value = ''
+                        submitInputName.value = ''
+                    }
+                }
+            });
+        });
+    }
+    submitControl.addEventListener('submit', handleSubmit)
+</script>

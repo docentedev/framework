@@ -1,0 +1,83 @@
+<%- include('includes/private/sec-a'); %>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h2">Crear Posts</h1>
+        </div>
+    </div>
+    <form id="dashboard-action-save">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            <label for="dashboard-input-title" class="form-label">Titulo</label>
+                            <input required id="dashboard-input-title" type="text" class="form-control"
+                                placeholder="Titulo">
+                        </div>
+                        <div class="mb-3">
+                            <div id="dashboard-editor-wrapper">
+                                <div id="toolbar-container">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-link"></button>
+                                    <button type="button" id="dashbaord-modal-media-control">
+                                        <i class="bi bi-collection-fill"></i>
+                                    </button>
+                                </div>
+                                <div class="dashboard-input-hidden-wrapper">
+                                    <div id="editor-container"></div>
+                                    <textarea required class="form-control dashboard-input-hidden"
+                                        id="editor-target"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mb-4">
+                    <div class="dashboard-input-hidden-wrapper">
+                        <div id="dashboard-thumbnail"></div>
+                        <input id="dashboard-thumbnail-input" required class="dashboard-input-hidden">
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="dashbaord-modal-media" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" id="dashboard-upload-file" action="/api/v1/files"
+                        enctype="multipart/form-data" method="POST">
+                        <div class="col-auto">
+                            <label for="file-upload" class="visually-hidden">File Upload</label>
+                            <input required class="form-control" id="file-upload" type="file" name="media">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-upload"></i></button>
+                        </div>
+                    </form>
+                    <div id="media"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('includes/private/sec-b'); %>
+
+        <script>
+            editorPage()
+        </script>
