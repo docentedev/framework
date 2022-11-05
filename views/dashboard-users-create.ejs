@@ -1,0 +1,35 @@
+<%- include('includes/private/sec-a'); %>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h2">Crear Usuario</h1>
+        </div>
+    </div>
+    <form id="dashboard-action-save">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="dashboard-input-username" class="form-label">Nombre de usuario</label>
+                            <input required name="dashboard-input-username" id="dashboard-input-username" type="text"
+                                class="form-control" placeholder="Nombre de usuario">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dashboard-input-password" class="form-label">Contraseña</label>
+                            <input required name="dashboard-input-password" id="dashboard-input-password" type="text"
+                                class="form-control" placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <%- include('includes/private/sec-b'); %>
+
+        <script>
+            userForm();
+        </script>

@@ -8,6 +8,8 @@ import { Post } from './types';
 import sendMail from './mail';
 import https from 'https';
 
+import userServices from './user.services'
+
 dotenv.config();
 
 const app: Express = express();
@@ -23,6 +25,7 @@ app.use('/static', express.static(path.join(mainFolder, 'public')))
 app.use('/files', express.static(path.join(mainFolder, 'files')))
 app.use('/media', express.static(path.join(mainFolder, 'uploads')))
 
+userServices(app, client)
 upload(app, client)
 publicRoutes(app, client)
 
@@ -32,15 +35,8 @@ app.get('/dashboard', (req: Request, res: Response) => {
 
 const getTextFromHtml = (str: string) => {
   let strippedString = str.replace(/(<([^>]+)>)/gi, "")
-  // &nbsp;
   strippedString = strippedString.replace(/&nbsp;/gi, " ")
   return strippedString
-  /*
-  let regex = '<\/?!?(p|a|strong|li|ul)[^>]*>'
-  var re = new RegExp(regex, 'g');
-  const out = str.replace(re, '');
-  return out
-  */
 }
 
 const getFirstNChar = (str: string, len: number) => {
@@ -83,6 +79,14 @@ app.get('/dashboard/endpoints', (req: Request, res: Response) => {
 app.get('/dashboard/posts/create', (req: Request, res: Response) => {
   res.render('dashboard-posts-create')
 })
+
+/*
+SELECT vehicle_number, dept_id, type
+FROM employee
+ORDER BY employee.id DESC
+LIMIT 20
+OFFSET 20;
+*/
 
 // API
 app.get('/api/v1/files', (req: Request, res: Response) => {
@@ -134,7 +138,7 @@ app.post('/api/v1/contact', (req: Request, res: Response) => {
     protocol: 'https:',
     hostname: 'www.google.com',
     port: 443,
-    path:`/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${req.body.token}`,
+    path: `/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${req.body.token}`,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

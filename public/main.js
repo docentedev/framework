@@ -18,7 +18,6 @@ const main = () => {
 
 main();
 
-// editor page
 const editorPage = () => {
 
     const modal = new bootstrap.Modal('#dashbaord-modal-media')
@@ -188,4 +187,33 @@ const editorPage = () => {
     }
 
     actionSave()
+}
+
+
+const userForm = () => {
+    const actionUserSave = () => {
+        const username = document.querySelector('#dashboard-input-username')
+        const password = document.querySelector('#dashboard-input-password')
+        const action = document.querySelector('#dashboard-action-save')
+        action.addEventListener('submit', async (event) => {
+            event.preventDefault()
+            const rawResponse = await fetch('/api/v1/users', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username.value,
+                    password: password.value,
+                })
+            })
+            const result = await rawResponse.json()
+            if (result) {
+                // window.location.href = "/dashboard/posts";
+            }
+        })
+    }
+
+    actionUserSave()
 }
