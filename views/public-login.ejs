@@ -1,0 +1,68 @@
+<%- include('includes/public/sec-a'); %>
+<div class="container public-login mt-4">
+  <div class="row">
+    <div class="col-sm-4 col"></div>
+    <div class="col-sm-4 col-12">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Login</h2>
+        </div>
+        <div class="col-md-12">
+          <form action="" id="public-action-login">
+            <div class="card">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="public-input-username" class="form-label"
+                    >Nombre de usuario</label
+                  >
+                  <input
+                    required
+                    name="public-input-username"
+                    id="public-input-username"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre de usuario"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="public-input-password" class="form-label"
+                    >Contraseña</label
+                  >
+                  <input
+                    required
+                    name="public-input-password"
+                    id="public-input-password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Contraseña"
+                  />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-primary public-btn-full" type="submit">
+                  Iniciar sesión
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /><br />
+<br />
+<br />
+<br />
+<br />
+<%- include('includes/public/sec-b'); %>
+
+<script>
+  loginForm();
+</script>

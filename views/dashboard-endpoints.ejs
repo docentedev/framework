@@ -1,22 +1,26 @@
 <%- include('includes/private/sec-a'); %>
-    <h1 class="h2">Endpoints</h1>
+<h1 class="h2">Endpoints</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Method</th>
-                <th scope="col">Url</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% endpoints.forEach(function(endpoint){ %>
-                <tr>
-                    <td scope="row">
-                        <span class="badge text-bg-primary"><%= endpoint.method %></span>
-                    </td>
-                    <td scope="row"><%= endpoint.url %></td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-    <%- include('includes/private/sec-b'); %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Method</th>
+      <th scope="col">Url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% endpoints.forEach(function(endpoint){ %>
+    <tr>
+      <td scope="row">
+        <span class="badge text-bg-primary"><%= endpoint.method %></span>
+      </td>
+      <td scope="row">
+        <a href="<%= endpoint.url %>" target="_blank" rel="noopener noreferrer">
+          <%= endpoint.url %>
+        </a>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('includes/private/sec-b'); %>

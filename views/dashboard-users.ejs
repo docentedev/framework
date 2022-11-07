@@ -1,0 +1,22 @@
+<%- include('includes/private/sec-a'); %>
+<h1 class="h2">Usuarios</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(function(user){ %>
+    <tr>
+      <td scope="row"><%= user.id %></td>
+      <td><%= user.username %></td>
+      <td><%= user.password %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('includes/private/sec-b'); %>

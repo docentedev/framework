@@ -20,9 +20,10 @@ main();
 
 const editorPage = () => {
 
-    const modal = new bootstrap.Modal('#dashbaord-modal-media')
+    const modalNode = document.querySelector('#dashbaord-modal-media')
+    const modal = new bootstrap.Modal(modalNode)
     let lastQuillPosition = 0;
-    let targetMediaLibrary = 'editor'
+    modalNode.dataset.targetMediaLibrary = 'editor'
 
     const editor = () => {
         var quill = new Quill('#editor-container', {
@@ -90,10 +91,10 @@ const editorPage = () => {
         const files = await fetch('/api/v1/files')
         const res = await files.json()
         const handleInsert = (event) => {
-            const targetInsert = targetMediaLibrary
+            const targetInsert = modalNode.dataset.targetMediaLibrary
             const target = event.target
             const src = target.dataset.src
-            if (quill) quill.insertEmbed(lastQuillPosition, 'image', src);
+            if (quill && targetInsert === 'editor') quill.insertEmbed(lastQuillPosition, 'image', src);
             else {
                 console.log(src, targetInsert, target.dataset.id)
                 const dashbaordModalMediaControl = document.querySelector('#dashboard-thumbnail')
@@ -142,7 +143,7 @@ const editorPage = () => {
         const dashbaordModalMediaControl = document.querySelector('#dashboard-thumbnail')
         dashbaordModalMediaControl.addEventListener('click', (event) => {
             showFiles(null, modal).then(() => {
-                targetMediaLibrary = 'thumbnail'
+                modalNode.dataset.targetMediaLibrary = 'thumbnail'
                 modal.show();
             })
         })
@@ -154,7 +155,7 @@ const editorPage = () => {
         const dashbaordModalMediaControl = document.querySelector('#dashbaord-modal-media-control')
         dashbaordModalMediaControl.addEventListener('click', (event) => {
             showFiles(quill, modal).then(() => {
-                targetMediaLibrary = 'editor'
+                modalNode.dataset.targetMediaLibrary = 'editor'
                 modal.show();
             })
         })
